@@ -1,16 +1,15 @@
 # Generador_QR
 
-Generador de códigos QR interactivo con soporte para texto, DNI y WhatsApp. Interfaz moderna y responsive.
+Generador de códigos QR interactivo con soporte para texto, DNI y WhatsApp. 
 
 ## Características
 
-- ✅ Generación de códigos QR para texto libre
-- ✅ Generación específica para números de DNI
-- ✅ Generación para números de WhatsApp con enlace directo
-- ✅ Interfaz moderna y responsive
-- ✅ Personalización de colores
-- ✅ Descarga de códigos QR generados
-- ✅ Validación de formatos específicos por país
+- Generación de códigos QR para texto libre
+- Generación específica para números de DNI
+- Generación para números de WhatsApp con enlace directo
+- Interfaz moderna y responsive
+- Personalización de colores
+- Descarga de códigos QR generados
 
 ## Uso
 
