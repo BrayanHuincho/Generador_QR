@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Códigos QR</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-qrcode"></i>
+                <h1>Generador de QR</h1>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="input-section">
+                <div class="qr-type-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-list"></i>
+                        Tipo de QR
+                    </h3>
+                    <div class="qr-type-selector">
+                        <button class="qr-type-btn active" data-type="text">
+                            <i class="fas fa-font"></i>
+                            <span>Texto</span>
+                        </button>
+                        <button class="qr-type-btn" data-type="dni">
+                            <i class="fas fa-id-card"></i>
+                            <span>DNI</span>
+                        </button>
+                        <button class="qr-type-btn" data-type="whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>WhatsApp</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div id="text-form" class="qr-form active">
+                        <label for="qr-text" class="input-label">
+                            <i class="fas fa-edit"></i>
+                            Ingresa tu texto o datos
+                        </label>
+                        <textarea 
+                            id="qr-text" 
+                            class="text-input" 
+                            placeholder="Escribe aquí cualquier texto, número, URL, email... ¡Lo que quieras!"
+                            rows="4"
+                        ></textarea>
+                        <div class="input-info">
+                            <span class="char-count">0 caracteres</span>
+                            <span class="input-tip">Máximo 2000 caracteres</span>
+                        </div>
+                    </div>
+
+                    <div id="dni-form" class="qr-form">
+                        <label for="dni-number" class="input-label">
+                            <i class="fas fa-id-card"></i>
+                            Número de DNI
+                        </label>
+                        <input 
+                            type="text" 
+                            id="dni-number" 
+                            class="text-input dni-input" 
+                            placeholder="12345678"
+                            maxlength="8"
+                            pattern="[0-9]{8}"
+                        >
+                        <div class="input-info">
+                            <span class="dni-count">0/8 dígitos</span>
+                            <span class="input-tip">Solo números, 8 dígitos</span>
+                        </div>
+                    </div>
+
+                    <div id="whatsapp-form" class="qr-form">
+                        <label for="whatsapp-number" class="input-label">
+                            <i class="fab fa-whatsapp"></i>
+                            Número de WhatsApp
+                        </label>
+                        <div class="phone-input-group">
+                            <select id="country-code" class="country-select">
+                                <option value="+51" data-digits="9" data-format="XXX XXX XXX">🇵🇪 Perú +51</option>
+                                <option value="+56" data-digits="9" data-format="X XXXX XXXX">🇨🇱 Chile +56</option>
+                                <option value="+54" data-digits="10" data-format="XX XXXX XXXX">🇦🇷 Argentina +54</option>
+                                <option value="+593" data-digits="9" data-format="XX XXX XXXX">🇪🇨 Ecuador +593</option>
+                                <option value="+591" data-digits="8" data-format="XXXX XXXX">🇧🇴 Bolivia +591</option>
+                            </select>
+                            <input 
+                                type="number" 
+                                id="whatsapp-number" 
+                                class="text-input phone-input" 
+                                placeholder="931 815 749"
+                                min="0"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            >
+                        </div>
+                        <textarea 
+                            id="whatsapp-message" 
+                            class="text-input message-input" 
+                            placeholder="Mensaje predefinido (opcional)"
+                            rows="2"
+                            style="display: none;"
+                        ></textarea>
+                        <div class="input-info">
+                            <span class="input-tip">Abrirá WhatsApp con este número</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="options-section">
+                    <h3 class="options-title">
+                        <i class="fas fa-palette"></i>
+                        Personalización
+                    </h3>
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label for="qr-color">Color Personalizado</label>
+                            <input type="color" id="qr-color" class="color-input" value="#000000">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="branding-section">
+                    <h3 class="section-title">
+                        <i class="fas fa-crown"></i>
+                        Branding (Opcional)
+                    </h3>
+                    <div class="branding-options">
+                        <div class="brand-input-group">
+                            <label for="brand-top">Texto Superior</label>
+                            <input type="text" id="brand-top" class="brand-input" placeholder="Tu nombre o empresa">
+                        </div>
+                        <div class="brand-input-group">
+                            <label for="brand-bottom">Texto Inferior</label>
+                            <input type="text" id="brand-bottom" class="brand-input" placeholder="Información adicional">
+                        </div>
+                    </div>
+                </div>
+
+                <button id="generate-btn" class="generate-btn">
+                    <i class="fas fa-magic"></i>
+                    Generar Código QR
+                </button>
+            </div>
+
+            <div class="output-section">
+                <div class="qr-container" id="qr-container">
+                    <div class="qr-placeholder">
+                        <i class="fas fa-qrcode"></i>
+                        <p>Tu código QR aparecerá aquí</p>
+                        <span>Ingresa texto y presiona "Generar"</span>
+                    </div>
+                </div>
+
+                <div class="download-section" id="download-section" style="display: none;">
+                    <button id="download-btn" class="download-btn">
+                        <i class="fas fa-download"></i>
+                        Descargar QR
+                    </button>
+                    <div class="qr-info">
+                        <p><strong>Contenido:</strong> <span id="qr-content-display"></span></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
