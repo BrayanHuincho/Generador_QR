@@ -954,45 +954,120 @@ class QRGenerator {
     }
 
     async addWhatsAppIcon(ctx, centerX, centerY) {
-        const iconSize = 40;
-        const bgSize = iconSize + 10;
+        const iconSize = 50;
+        const bgSize = iconSize + 12;
         
+        // Fondo blanco con borde
         ctx.fillStyle = '#FFFFFF';
         ctx.beginPath();
         ctx.arc(centerX, centerY, bgSize / 2, 0, 2 * Math.PI);
         ctx.fill();
         
+        // Borde gris suave
+        ctx.strokeStyle = '#E0E0E0';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Fondo verde de WhatsApp
         ctx.fillStyle = '#25D366';
         ctx.beginPath();
         ctx.arc(centerX, centerY, iconSize / 2, 0, 2 * Math.PI);
         ctx.fill();
         
+        // Dibujar el logo clásico de WhatsApp (globo de chat con teléfono)
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 24px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('W', centerX, centerY);
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 3;
+        
+        // Globo de chat principal (círculo grande)
+        ctx.beginPath();
+        ctx.arc(centerX - 2, centerY - 3, 16, 0, 2 * Math.PI);
+        ctx.fill();
+        
+        // Cola del globo (triángulo)
+        ctx.beginPath();
+        ctx.moveTo(centerX + 8, centerY + 8);
+        ctx.lineTo(centerX + 15, centerY + 15);
+        ctx.lineTo(centerX + 5, centerY + 12);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Dibujar el teléfono dentro del globo
+        ctx.fillStyle = '#25D366';
+        ctx.strokeStyle = '#25D366';
+        ctx.lineWidth = 2;
+        
+        // Cuerpo del teléfono
+        ctx.beginPath();
+        ctx.roundRect(centerX - 8, centerY - 12, 12, 18, 2);
+        ctx.fill();
+        
+        // Pantalla del teléfono
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(centerX - 6, centerY - 10, 8, 12);
+        
+        // Auricular del teléfono (parte superior)
+        ctx.fillStyle = '#25D366';
+        ctx.beginPath();
+        ctx.arc(centerX - 2, centerY - 14, 2, 0, Math.PI);
+        ctx.fill();
+        
+        // Micrófono del teléfono (parte inferior)
+        ctx.beginPath();
+        ctx.arc(centerX - 2, centerY + 4, 1.5, 0, 2 * Math.PI);
+        ctx.fill();
     }
 
     async addDNIIcon(ctx, centerX, centerY) {
-        const iconSize = 40;
-        const bgSize = iconSize + 10;
+        const iconSize = 50;
+        const bgSize = iconSize + 12;
         
+        // Fondo blanco con borde
         ctx.fillStyle = '#FFFFFF';
         ctx.beginPath();
         ctx.arc(centerX, centerY, bgSize / 2, 0, 2 * Math.PI);
         ctx.fill();
         
-        ctx.fillStyle = '#FF6B6B';
+        // Borde gris suave
+        ctx.strokeStyle = '#E0E0E0';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Fondo azul peruano para DNI
+        ctx.fillStyle = '#C41E3A'; // Rojo de la bandera peruana
         ctx.beginPath();
         ctx.arc(centerX, centerY, iconSize / 2, 0, 2 * Math.PI);
         ctx.fill();
         
+        // Dibujar documento de identidad
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = 'bold 16px Arial';
-        ctx.textAlign = 'center';
-        ctx.textBaseline = 'middle';
-        ctx.fillText('DNI', centerX, centerY);
+        
+        // Documento principal (rectángulo)
+        const docWidth = 20;
+        const docHeight = 14;
+        ctx.fillRect(centerX - docWidth/2, centerY - docHeight/2, docWidth, docHeight);
+        
+        // Borde del documento
+        ctx.strokeStyle = '#C41E3A';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(centerX - docWidth/2, centerY - docHeight/2, docWidth, docHeight);
+        
+        // Foto en el documento
+        ctx.fillStyle = '#E0E0E0';
+        ctx.fillRect(centerX - docWidth/2 + 2, centerY - docHeight/2 + 2, 6, 6);
+        
+        // Líneas de texto en el documento
+        ctx.fillStyle = '#C41E3A';
+        ctx.fillRect(centerX - docWidth/2 + 10, centerY - docHeight/2 + 3, 8, 1);
+        ctx.fillRect(centerX - docWidth/2 + 10, centerY - docHeight/2 + 5, 6, 1);
+        ctx.fillRect(centerX - docWidth/2 + 2, centerY - docHeight/2 + 9, 16, 1);
+        ctx.fillRect(centerX - docWidth/2 + 2, centerY - docHeight/2 + 11, 12, 1);
+        
+        // Escudo o sello oficial (pequeño círculo)
+        ctx.fillStyle = '#FFD700'; // Dorado
+        ctx.beginPath();
+        ctx.arc(centerX + 6, centerY + 4, 3, 0, 2 * Math.PI);
+        ctx.fill();
     }
 
     hexToRgb(hex) {
